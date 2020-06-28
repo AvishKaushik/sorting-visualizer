@@ -1,0 +1,18 @@
+body {
+  background-color: black;
+}
+
+.array-container {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top:20px;
+}
+
+.array-bar {
+  width: 2px;
+  background-color: cyan;
+  display: inline-block;
+  color: transparent;
+  margin: 0 1px;
+}
