@@ -127,7 +127,7 @@ export default class SortingVisualizer extends React.Component {
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
-        }, i*2);
+        }, i*0.4);
       }
       else
       {
@@ -137,7 +137,7 @@ export default class SortingVisualizer extends React.Component {
         setTimeout(() => {
           boStyle.height = `${newHeight}px`;
           bsStyle.height = `${newHeight2}px`;
-        }, i*2);
+        }, i*0.4);
       }
     }
   }
