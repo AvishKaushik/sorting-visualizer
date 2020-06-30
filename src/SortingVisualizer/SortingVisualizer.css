@@ -3,11 +3,27 @@ body {
 }
 
 button {
+  margin-top: 20px;
+  margin-left: 10px;
   margin-right: 10px;
 }
 
+select {
+  width: 220px;
+  height: 22px;
+}
+
+#sortingChooser {
+  width: 180px;
+  height: 22px;
+}
+
+#operator {
+  margin-top: 20px;
+  align-content: center;
+}
+
 .array-container {
-  position: absolute;
   left: 9%;
   right: 9%;
   top:20px;
