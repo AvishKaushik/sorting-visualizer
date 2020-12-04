@@ -7,14 +7,22 @@ import HeapSorting from '../SortingAlgorithms/HeapSort.js';
 import RadixSorting from '../SortingAlgorithms/RadixSort.js';
 import InsertionSorting from '../SortingAlgorithms/InsertionSort.js';
 import SelectionSorting from '../SortingAlgorithms/SelectionSort.js';
+import ShellSorting from '../SortingAlgorithms/ShellSort.js';
+import CombSorting from '../SortingAlgorithms/CombSort.js';
+import CycleSorting from '../SortingAlgorithms/CycleSort.js';
+import PigeonholeSorting from '../SortingAlgorithms/PigeonholeSort.js';
+import GnomeSorting from '../SortingAlgorithms/GnomeSort.js';
+import BogoSorting from '../SortingAlgorithms/BogoSort.js';
 
 
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       array: [],
+      abar: '25',
+      time: '1200',
+      speed: '4',
     };
   }
 
@@ -22,20 +30,48 @@ export default class SortingVisualizer extends React.Component {
     this.resetArray();
   }
 
+  checkAll() {
+    const arrayBar=document.getElementsByClassName('array-bar');
+    for(let i=0;i<arrayBar.length;++i)
+    {
+      const barStyle = arrayBar[i].style;
+      setTimeout(() => {
+      barStyle.backgroundColor = '#39FF14';
+      }, i*this.state.time/this.state.speed);
+    }
+  }
+  
   resetArray() {
     const array = [];
-    for ( let i=0;i<310;i++) {
-      array.push(randomIntFromInterval(5,650));
+    for ( let i=0;i<this.state.abar;i++) {
+      array.push(randomIntFromInterval(14,650));
     }
     this.setState({array});
+    const arrayBar=document.getElementsByClassName('array-bar');
+    for ( let i=0;i<array.length;i++) {
+      if(!arrayBar[i])
+      {
+        continue;
+      }
+      else{
+      const boStyle = arrayBar[i].style;
+      boStyle.backgroundColor='cyan';
+      }
+    }
   }
 
   quickSort() {
     const anim = QuickSorting(this.state.array);
-    for(let i=0;i<anim.length;i++)
+    for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
-      if(i % 3 !== 2)
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
       {
         const [bfidx,btidx,low,high] = anim[i];
         const boStyle = arrayBar[bfidx].style;
@@ -45,7 +81,7 @@ export default class SortingVisualizer extends React.Component {
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
-        }, i*2);
+        }, i*this.state.time/this.state.speed);
       }
       else
       {
@@ -53,171 +89,27 @@ export default class SortingVisualizer extends React.Component {
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
         setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
           boStyle.height = `${newHeight}px`;
           bsStyle.height = `${newHeight2}px`;
-        }, i*2);
+        }, i*this.state.time/this.state.speed);
       }
     }
   }
 
-  heapSort() {
-    const anim = HeapSorting(this.state.array);
-    for(let i=0;i<anim.length;i++)
+  shellSort() {
+    const anim = ShellSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
-      if(i % 3 !== 2)
+      if(i==anim.length)
       {
-        const [boidx,bsidx] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
         setTimeout(() => {
-          boStyle.backgroundColor = color;
-          bsStyle.backgroundColor = color;
-        }, i*2);
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
       }
-      else
-      {
-        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const bsStyle = arrayBar[bsidx].style;
-        setTimeout(() => {
-          boStyle.height = `${newHeight}px`;
-          bsStyle.height = `${newHeight2}px`;
-        }, i*2);
-      }
-    }
-  }
-
-  radixSort() {
-    const arrlen = this.state.array;
-    const anim = RadixSorting(this.state.array);
-    let fx=0,sx=0;
-    for(let i=0;i<anim.length;i++)
-    {
-      const arrayBar=document.getElementsByClassName('array-bar');
-      if(fx<(this.state.array.length*2))
-      {
-        const [boidx] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const color = i % 2 === 0 ? 'red':'cyan';
-        setTimeout(() => {
-          boStyle.backgroundColor = color;
-        }, i*4);
-        fx++;
-      }
-      else if(sx<this.state.array.length)
-      {
-        const [boidx,newHeight] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        setTimeout(() => {
-          boStyle.height = `${newHeight}px`;
-        }, i*4);
-        sx++;
-      }
-      else {
-        fx=1;
-        sx=0;
-        const [boidx] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const color = i % 2 === 0 ? 'red':'cyan';
-        setTimeout(() => {
-          boStyle.backgroundColor = color;
-        }, i*4);
-      }
-    }
-  }
-
-  selectionSort() {
-    const anim = SelectionSorting(this.state.array);
-    for(let i=0;i<anim.length;i++)
-    {
-      const arrayBar=document.getElementsByClassName('array-bar');
-      if(i % 3 !== 2)
-      {
-        const [boidx,bsidx] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
-        setTimeout(() => {
-          boStyle.backgroundColor = color;
-          bsStyle.backgroundColor = color;
-        }, i*2);
-      }
-      else
-      {
-        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const bsStyle = arrayBar[bsidx].style;
-        setTimeout(() => {
-          boStyle.height = `${newHeight}px`;
-          bsStyle.height = `${newHeight2}px`;
-        }, i*2);
-      }
-    }
-  }
-
-
-  mergeSort() {
-    const anim = MergeSorting(this.state.array);
-    for(let i=0;i<anim.length;i++)
-    {
-      const arrayBar=document.getElementsByClassName('array-bar');
-      if(i % 3 !== 2)
-      {
-        const [boidx,bsidx] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
-        setTimeout(() => {
-          boStyle.backgroundColor = color;
-          bsStyle.backgroundColor = color;
-        }, i*2);
-      }
-      else
-      {
-        const [boidx,newHeight] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        setTimeout(() => {
-          boStyle.height = `${newHeight}px`;
-        }, i*2);
-      }
-    }
-  }
-
-  insertionSort() {
-    const anim = InsertionSorting(this.state.array);
-    for(let i=0;i<anim.length;i++)
-    {
-      const arrayBar=document.getElementsByClassName('array-bar');
-      if(i % 3 !== 2)
-      {
-        const [boidx,bsidx] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
-        setTimeout(() => {
-          boStyle.backgroundColor = color;
-          bsStyle.backgroundColor = color;
-        }, i*0.2);
-      }
-      else
-      {
-        const [boidx,newHeight] = anim[i];
-        const boStyle = arrayBar[boidx].style;
-        setTimeout(() => {
-          boStyle.height = `${newHeight}px`;
-        }, i*0.2);
-      }
-    }
-  }
-
-  bubbleSort() {
-    const anim = BubbleSorting(this.state.array);
-    for(let i=0;i<anim.length;i++)
-    {
-      const arrayBar=document.getElementsByClassName('array-bar');
-      if(i % 3 !== 2)
+      else if(i % 3 !== 2)
       {
         const [bfidx,btidx] = anim[i];
         const boStyle = arrayBar[bfidx].style;
@@ -226,7 +118,41 @@ export default class SortingVisualizer extends React.Component {
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
-        }, i*0.4);
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          boStyle.height = `${newHeight}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  combSort() {
+    const anim = CombSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [bfidx,btidx] = anim[i];
+        const boStyle = arrayBar[bfidx].style;
+        const bsStyle = arrayBar[btidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
       }
       else
       {
@@ -234,9 +160,396 @@ export default class SortingVisualizer extends React.Component {
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
         setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
           boStyle.height = `${newHeight}px`;
           bsStyle.height = `${newHeight2}px`;
-        }, i*0.4);
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+    console.log(anim);
+  }
+
+  cycleSort() {
+    const anim = CycleSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [bfidx,btidx] = anim[i];
+        const boStyle = arrayBar[bfidx].style;
+        const bsStyle = arrayBar[btidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
+          boStyle.height = `${newHeight}px`;
+          bsStyle.height = `${newHeight2}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+    console.log(anim);
+  }
+
+  heapSort() {
+    const anim = HeapSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [boidx,bsidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
+          boStyle.height = `${newHeight}px`;
+          bsStyle.height = `${newHeight2}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  radixSort() {
+    const arrlen = this.state.array;
+    const anim = RadixSorting(this.state.array);
+    let fx=0,sx=0;
+    let o=0;
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(fx<(this.state.array.length*2))
+      {
+        const [boidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const color = i % 2 === (o%2) ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+        fx++;
+      }
+      else if(sx<this.state.array.length)
+      {
+        const [boidx,newHeight] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          boStyle.height = `${newHeight}px`;
+        }, i*this.state.time/this.state.speed);
+        sx++;
+        o++;
+      }
+      else {
+        fx=1;
+        sx=0;
+        const [boidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const color = i % 2 === (o%2) ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  selectionSort() {
+    const anim = SelectionSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [boidx,bsidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
+          boStyle.height = `${newHeight}px`;
+          bsStyle.height = `${newHeight2}px`;
+        }, i*this.state.speed);
+      }
+    }
+  }
+
+
+  mergeSort() {
+    const anim = MergeSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [boidx,bsidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          boStyle.height = `${newHeight}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  insertionSort() {
+    const anim = InsertionSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [boidx,bsidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          boStyle.height = `${newHeight}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  gnomeSort() {
+    const anim = GnomeSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [boidx,bsidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
+          boStyle.height = `${newHeight}px`;
+          bsStyle.height = `${newHeight2}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  bogoSort() {
+    const anim = BogoSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [boidx,bsidx] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
+          boStyle.height = `${newHeight}px`;
+          bsStyle.height = `${newHeight2}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+    console.log(anim);
+  }
+
+  bubbleSort() {
+    const anim = BubbleSorting(this.state.array);
+    for(let i=0;i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if(i % 3 !== 2)
+      {
+        const [bfidx,btidx] = anim[i];
+        const boStyle = arrayBar[bfidx].style;
+        const bsStyle = arrayBar[btidx].style;
+        const color = i % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+          bsStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight,bsidx,newHeight2] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        const bsStyle = arrayBar[bsidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          arrayBar[bsidx].innerHTML=newHeight2;
+          boStyle.height = `${newHeight}px`;
+          bsStyle.height = `${newHeight2}px`;
+        }, i*this.state.time/this.state.speed);
+      }
+    }
+  }
+
+  pigeonholeSort() {
+    const anim = PigeonholeSorting(this.state.array);
+    let arr=this.state.array;
+    for(let i=0;i<(2*arr.length);i++)
+    {
+      const arrayBar1=document.getElementsByClassName('array-bar');
+      const [bfidx] = anim[i];
+      const boStyle = arrayBar1[bfidx].style;
+      const color = i % 2 === 0 ? 'red':'cyan';
+      setTimeout(() => {
+        boStyle.backgroundColor = color;
+      }, i*this.state.time/this.state.speed);
+    }
+    for(let i=(arr.length*2);i<=anim.length;i++)
+    {
+      const arrayBar=document.getElementsByClassName('array-bar');
+      if(i==anim.length)
+      {
+        setTimeout(() => {
+          this.checkAll();
+        }, i*this.state.time/this.state.speed);
+      }
+      else if((i-(arr.length*2)) % 3 !== 2)
+      {
+        const [bfidx] = anim[i];
+        const boStyle = arrayBar[bfidx].style;
+        const color = (i-arr.length*2) % 3 === 0 ? 'red':'cyan';
+        setTimeout(() => {
+          boStyle.backgroundColor = color;
+        }, i*this.state.time/this.state.speed);
+      }
+      else
+      {
+        const [boidx,newHeight] = anim[i];
+        const boStyle = arrayBar[boidx].style;
+        setTimeout(() => {
+          arrayBar[boidx].innerHTML=newHeight;
+          boStyle.height = `${newHeight}px`;
+        }, i*this.state.time/this.state.speed);
       }
     }
   }
@@ -263,39 +576,84 @@ export default class SortingVisualizer extends React.Component {
     if(this.refs.sortingType.value == "RadixSort") {
       this.radixSort();
     }
-  }
-
-  render() {
-    const {array} = this.state;
-
-    return (
-      <div>
-        <div>
-          <button onClick={()=>this.resetArray()}>Generate a new array</button>
-          <select ref="sortingType">
-            <option value="HeapSort">Heap Sort</option>
-            <option value="BubbleSort">Bubble Sort</option>
-            <option value="MergeSort">Merge Sort</option>
-            <option value="QuickSort">Quick Sort</option>
-            <option value="InsertionSort">Insertion Sort</option>
-            <option value="SelectionSort">Selection Sort</option>
-            <option value="RadixSort">Radix Sort</option>
-          </select>
-          <button onClick={()=>this.startSorting()}>Run Sorting</button>
-          <hr></hr>
-        </div>
-        <div className="array-container">
-          {array.map((value, idx) => (
-            <div
-              className="array-bar"
-              key={idx}
-              style={{height: `${value}px`}}></div>
-            ))}
-          <hr></hr>
-        </div>
-      </div>
-      );
+    if(this.refs.sortingType.value == "ShellSort") {
+      this.shellSort();
     }
+    if(this.refs.sortingType.value == "CombSort") {
+      this.combSort();
+    }
+    if(this.refs.sortingType.value == "CycleSort") {
+      this.cycleSort();
+    }
+    if(this.refs.sortingType.value == "PigeonholeSort") {
+      this.pigeonholeSort();
+    }
+    if(this.refs.sortingType.value == "GnomeSort") {
+      this.gnomeSort();
+    }
+    /*if(this.refs.sortingType.value == "BogoSort") {
+    this.bogoSort();
+  }*/
+}
+
+handleChange(e) {
+  let obj = {};
+  obj[e.target.name] = e.target.value;
+  this.state.abar=e.target.value;
+  this.setState(obj);
+  this.resetArray();
+}
+
+speedChange(e) {
+  let obj = {};
+  obj[e.target.name] = e.target.value;
+  this.state.speed=e.target.value;
+  this.setState(obj);
+}
+
+render() {
+  const {array} = this.state;
+
+  return (
+    <div>
+    <div>
+    <button onClick={()=>this.resetArray()}>Generate a new array</button>
+    <select ref="sortingType">
+    <option value="BubbleSort">Bubble Sort</option>
+    <option value="CombSort">Comb Sort</option>
+    <option value="CycleSort">Cycle Sort</option>
+    <option value="GnomeSort">Gnome Sort</option>
+    <option value="HeapSort">Heap Sort</option>
+    <option value="InsertionSort">Insertion Sort</option>
+    <option value="MergeSort">Merge Sort</option>
+    <option value="PigeonholeSort">Pigeonhole Sort</option>
+    <option value="QuickSort">Quick Sort</option>
+    <option value="RadixSort">Radix Sort</option>
+    <option value="SelectionSort">Selection Sort</option>
+    <option value="ShellSort">Shell Sort</option>
+    </select>
+    <a>Array Bar:</a>
+    <input id="slider" type="range" min="4" max="40" name='abar' value={this.state.abar} onChange={(e) => {this.handleChange(e)}}/>
+    <a>Speed:</a>
+    <input id="slider" type="range" min="4" max="40" name='speed' value={this.state.speed} onChange={(e) => {this.speedChange(e)}}/>
+    <button onClick={()=>this.startSorting()}>Run Sorting</button>
+    <hr></hr>
+    </div>
+    <div className="array-container">
+    <div className="tb"></div>
+    {array.map((value, idx) => (
+      <div
+      className="array-bar"
+      key={idx}
+      style={{height: `${value}px`}}>{value}</div>
+    ))}
+    </div>
+    <div className="arrangement">
+    <hr></hr>
+    </div>
+    </div>
+  );
+}
 }
 
 function randomIntFromInterval(min, max) {

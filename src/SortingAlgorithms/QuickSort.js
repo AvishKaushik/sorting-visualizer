@@ -3,7 +3,12 @@ import React from 'react'
 function QuickSorting(array) {
   const anim=[];
   if(array.length <= 1) return array;
+  for(let i=0;i<array.length;++i)
+  {
+    console.log(array[i]);
+  }
   sortingDivisor(array,0,array.length -1,anim);
+  console.log("Sorted");
   for(let i=0;i<array.length;++i)
   {
     console.log(array[i]);

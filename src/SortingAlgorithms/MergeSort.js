@@ -37,17 +37,17 @@ function performMerging(mArray,sIdx,mIdx,eIdx,auxArray,anim) {
   }
   while(i<=mIdx)
   {
-      anim.push([i,i]);
-      anim.push([i,i]);
-      anim.push([j,auxArray[i]]);
-      mArray[j++]=auxArray[i++];
+    anim.push([i,i]);
+    anim.push([i,i]);
+    anim.push([j,auxArray[i]]);
+    mArray[j++]=auxArray[i++];
   }
   while(k<=eIdx)
   {
-      anim.push([k,k]);
-      anim.push([k,k]);
-      anim.push([j,auxArray[k]]);
-      mArray[j++]=auxArray[k++];
+    anim.push([k,k]);
+    anim.push([k,k]);
+    anim.push([j,auxArray[k]]);
+    mArray[j++]=auxArray[k++];
   }
 }
 
