@@ -36,7 +36,8 @@ export default class SortingVisualizer extends React.Component {
     {
       const barStyle = arrayBar[i].style;
       setTimeout(() => {
-      barStyle.backgroundColor = '#39FF14';
+      barStyle.backgroundColor = '#24C921';
+      barStyle.color = 'rgba(0,0,0,1)';
       }, i*this.state.time/this.state.speed);
     }
   }
@@ -55,7 +56,8 @@ export default class SortingVisualizer extends React.Component {
       }
       else{
       const boStyle = arrayBar[i].style;
-      boStyle.backgroundColor='cyan';
+      boStyle.backgroundColor='rgb(12, 53, 71)';
+      boStyle.color='#e9e4e4';
       }
     }
   }
@@ -77,7 +79,7 @@ export default class SortingVisualizer extends React.Component {
         const boStyle = arrayBar[bfidx].style;
         const bsStyle = arrayBar[btidx].style;
         const lbStyle = arrayBar[high].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -114,7 +116,7 @@ export default class SortingVisualizer extends React.Component {
         const [bfidx,btidx] = anim[i];
         const boStyle = arrayBar[bfidx].style;
         const bsStyle = arrayBar[btidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -148,7 +150,7 @@ export default class SortingVisualizer extends React.Component {
         const [bfidx,btidx] = anim[i];
         const boStyle = arrayBar[bfidx].style;
         const bsStyle = arrayBar[btidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -186,7 +188,7 @@ export default class SortingVisualizer extends React.Component {
         const [bfidx,btidx] = anim[i];
         const boStyle = arrayBar[bfidx].style;
         const bsStyle = arrayBar[btidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -224,7 +226,7 @@ export default class SortingVisualizer extends React.Component {
         const [boidx,bsidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -263,7 +265,7 @@ export default class SortingVisualizer extends React.Component {
       {
         const [boidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
-        const color = i % 2 === (o%2) ? 'red':'cyan';
+        const color = i % 2 === (o%2) ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
         }, i*this.state.time/this.state.speed);
@@ -285,7 +287,7 @@ export default class SortingVisualizer extends React.Component {
         sx=0;
         const [boidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
-        const color = i % 2 === (o%2) ? 'red':'cyan';
+        const color = i % 2 === (o%2) ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
         }, i*this.state.time/this.state.speed);
@@ -309,7 +311,7 @@ export default class SortingVisualizer extends React.Component {
         const [boidx,bsidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -325,7 +327,7 @@ export default class SortingVisualizer extends React.Component {
           arrayBar[bsidx].innerHTML=newHeight2;
           boStyle.height = `${newHeight}px`;
           bsStyle.height = `${newHeight2}px`;
-        }, i*this.state.speed);
+        }, i*this.state.time/this.state.speed);
       }
     }
   }
@@ -347,7 +349,7 @@ export default class SortingVisualizer extends React.Component {
         const [boidx,bsidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -381,7 +383,7 @@ export default class SortingVisualizer extends React.Component {
         const [boidx,bsidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -415,7 +417,7 @@ export default class SortingVisualizer extends React.Component {
         const [boidx,bsidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -452,7 +454,7 @@ export default class SortingVisualizer extends React.Component {
         const [boidx,bsidx] = anim[i];
         const boStyle = arrayBar[boidx].style;
         const bsStyle = arrayBar[bsidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -490,7 +492,7 @@ export default class SortingVisualizer extends React.Component {
         const [bfidx,btidx] = anim[i];
         const boStyle = arrayBar[bfidx].style;
         const bsStyle = arrayBar[btidx].style;
-        const color = i % 3 === 0 ? 'red':'cyan';
+        const color = i % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
           bsStyle.backgroundColor = color;
@@ -519,7 +521,7 @@ export default class SortingVisualizer extends React.Component {
       const arrayBar1=document.getElementsByClassName('array-bar');
       const [bfidx] = anim[i];
       const boStyle = arrayBar1[bfidx].style;
-      const color = i % 2 === 0 ? 'red':'cyan';
+      const color = i % 2 === 0 ? 'cyan':'rgb(12, 53, 71)';
       setTimeout(() => {
         boStyle.backgroundColor = color;
       }, i*this.state.time/this.state.speed);
@@ -537,7 +539,7 @@ export default class SortingVisualizer extends React.Component {
       {
         const [bfidx] = anim[i];
         const boStyle = arrayBar[bfidx].style;
-        const color = (i-arr.length*2) % 3 === 0 ? 'red':'cyan';
+        const color = (i-arr.length*2) % 3 === 0 ? 'cyan':'rgb(12, 53, 71)';
         setTimeout(() => {
           boStyle.backgroundColor = color;
         }, i*this.state.time/this.state.speed);
