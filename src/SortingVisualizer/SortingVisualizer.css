@@ -41,16 +41,19 @@ label {
 
 .array-bar {
   width: 20px;
-  background-color: rgb(12, 53, 71);
+  background-color: #ffbf00;
   display: inline-block;
   color: transparent;
   margin: 0 3px;
   position: relative;
   max-height: 660px;
-  color: #e9e4e4;
+  color: #000000;
   transform: rotateX(180deg);
   font-size: 0.7em;
+  border: 4px solid rgb(12, 53, 71);
+  border-bottom: 4px solid #ffbf00;
 }
+
 .tb {
   width: 20px;
   display: inline-block;
