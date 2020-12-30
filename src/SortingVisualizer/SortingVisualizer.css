@@ -52,6 +52,7 @@ label {
   font-size: 0.7em;
   border: 4px solid rgb(12, 53, 71);
   border-bottom: 4px solid #ffbf00;
+  transition: 1s;
 }
 
 .tb {
