@@ -87,7 +87,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   quickSort() {
-    const anim = QuickSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = QuickSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -125,7 +126,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   shellSort() {
-    const anim = ShellSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = ShellSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -159,7 +161,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   combSort() {
-    const anim = CombSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = CombSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -197,7 +200,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   cycleSort() {
-    const anim = CycleSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = CycleSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -235,7 +239,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   heapSort() {
-    const anim = HeapSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = HeapSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -272,8 +277,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   radixSort() {
-    const arrlen = this.state.array;
-    const anim = RadixSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = RadixSorting(ax);
     let fx=0,sx=0;
     let o=0;
     for(let i=0;i<=anim.length;i++)
@@ -320,7 +325,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   selectionSort() {
-    const anim = SelectionSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = SelectionSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -358,7 +364,8 @@ export default class SortingVisualizer extends React.Component {
 
 
   mergeSort() {
-    const anim = MergeSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = MergeSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -392,7 +399,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   insertionSort() {
-    const anim = InsertionSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = InsertionSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -426,7 +434,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   gnomeSort() {
-    const anim = GnomeSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = GnomeSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -463,7 +472,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   bogoSort() {
-    const anim = BogoSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = BogoSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -501,7 +511,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   bubbleSort() {
-    const anim = BubbleSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = BubbleSorting(ax);
     for(let i=0;i<=anim.length;i++)
     {
       const arrayBar=document.getElementsByClassName('array-bar');
@@ -538,7 +549,8 @@ export default class SortingVisualizer extends React.Component {
   }
 
   pigeonholeSort() {
-    const anim = PigeonholeSorting(this.state.array);
+    const ax=this.state.array.slice(0);
+    const anim = PigeonholeSorting(ax);
     let arr=this.state.array;
     for(let i=0;i<(2*arr.length);i++)
     {
@@ -623,33 +635,18 @@ export default class SortingVisualizer extends React.Component {
   }*/
 }
 
-handleChange(e) {
-  let obj = {};
-  obj[e.target.name] = e.target.value;
-  this.state.abar=e.target.value;
-  this.setState(obj);
-  this.resetArray();
-}
-
-speedChange(e) {
-  let obj = {};
-  obj[e.target.name] = e.target.value;
-  this.state.speed=e.target.value;
-  this.setState(obj);
-}
-
 
 render() {
   const {array} = this.state;
 
-  const handleChange2 = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     console.log(event);
     this.state.abar=newValue;
     this.setState();
     this.resetArray();
   };
 
-  const speedChange2 = (e, newValue) => {
+  const speedChange = (e, newValue) => {
     console.log(e);
     let obj = {};
     obj[e.target.name] = e.target.value;
@@ -678,7 +675,7 @@ render() {
     <a>Array Bar:</a>
     <Slider
             value={this.state.abar}
-            onChange={handleChange2}
+            onChange={handleChange}
             aria-labelledby="continuous-slider"
             valueLabelDisplay="on"
             min={4}
@@ -690,13 +687,12 @@ render() {
     <a>Speed:</a>
     <Slider
             value={this.state.speed}
-            onChange={speedChange2}
+            onChange={speedChange}
             aria-labelledby="continuous-slider"
-            valueLabelDisplay="on"
+            valueLabelDisplay="off"
             min={1}
             max={10}
             id="slid2"
-            valueLabelDisplay="auto"
             marks={marks}
             disabled={this.state.disabled}
           />
