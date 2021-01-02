@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-import './SortingVisualizer.css';
 import MergeSorting from '../SortingAlgorithms/MergeSort.js';
 import QuickSorting from '../SortingAlgorithms/QuickSort.js';
 import BubbleSorting from '../SortingAlgorithms/BubbleSort.js';
@@ -13,7 +12,27 @@ import CycleSorting from '../SortingAlgorithms/CycleSort.js';
 import PigeonholeSorting from '../SortingAlgorithms/PigeonholeSort.js';
 import GnomeSorting from '../SortingAlgorithms/GnomeSort.js';
 import BogoSorting from '../SortingAlgorithms/BogoSort.js';
+import { Button, Slider} from '@material-ui/core';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
+import './SortingVisualizer.css';
 
+
+const marks = [
+  {
+    value: 2,
+    label: 'Slow',
+  },
+  {
+    value: 5,
+    label: 'Medium',
+  },
+  {
+    value: 8,
+    label: 'Fast',
+  },
+];
 
 export default class SortingVisualizer extends React.Component {
   constructor(props) {
@@ -22,7 +41,7 @@ export default class SortingVisualizer extends React.Component {
       array: [],
       abar: '25',
       time: '1200',
-      speed: '4',
+      speed: '5',
     };
   }
 
@@ -42,14 +61,11 @@ export default class SortingVisualizer extends React.Component {
     }
     var btn1 = document.getElementById("btn1");
     var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
     var btn4 = document.getElementById("btn4");
     var btn5 = document.getElementById("btn5");
     setTimeout(() => {
       btn1.disabled = false;
       btn2.disabled = false;
-      btn3.disabled = false;
-      btn4.disabled = false;
       btn5.disabled = false;
       }, (this.state.time/this.state.speed) * (arrayBar.length));
   }
@@ -57,7 +73,7 @@ export default class SortingVisualizer extends React.Component {
   resetArray() {
     const array = [];
     for ( let i=0;i<this.state.abar;i++) {
-      array.push(randomIntFromInterval(14,650));
+      array.push(randomIntFromInterval(40,580));
     }
     this.setState({array});
     const arrayBar=document.getElementsByClassName('array-bar');
@@ -71,6 +87,8 @@ export default class SortingVisualizer extends React.Component {
       boStyle.backgroundColor='#ffbf00';
       }
     }
+    var vl=document.getElementById("x");
+    vl.style.width=(((this.state.abar)*36)+80)+'px';
   }
 
   quickSort() {
@@ -575,8 +593,6 @@ export default class SortingVisualizer extends React.Component {
     var btn5 = document.getElementById("btn5");
     btn1.disabled = true;
     btn2.disabled = true;
-    btn3.disabled = true;
-    btn4.disabled = true;
     btn5.disabled = true;
     if(this.refs.sortingType.value == "HeapSort") {
       this.heapSort();
@@ -634,14 +650,30 @@ speedChange(e) {
   this.setState(obj);
 }
 
+
 render() {
   const {array} = this.state;
+
+  const handleChange2 = (event, newValue) => {
+    console.log(event);
+    this.state.abar=newValue;
+    this.setState();
+    this.resetArray();
+  };
+
+  const speedChange2 = (e, newValue) => {
+    console.log(e);
+    let obj = {};
+    obj[e.target.name] = e.target.value;
+    this.state.speed=newValue;
+    this.setState(e);
+  };
 
   return (
     <div>
     <div>
-    <button onClick={()=>this.resetArray()} id="btn1">Generate a new array</button>
-    <select ref="sortingType" id="btn5" onChange={()=>this.resetArray()}>
+    <Button onClick={()=>this.resetArray()} id="btn1">Generate a new array</Button>
+    <select className="browser-default custom-select" ref="sortingType" id="btn5" onChange={()=>this.resetArray()}>
     <option value="BubbleSort">Bubble Sort</option>
     <option value="CombSort">Comb Sort</option>
     <option value="CycleSort">Cycle Sort</option>
@@ -656,19 +688,38 @@ render() {
     <option value="ShellSort">Shell Sort</option>
     </select>
     <a>Array Bar:</a>
-    <input id="btn3" type="range" min="4" max="40" name='abar' value={this.state.abar} onChange={(e) => {this.handleChange(e)}}/>
+    <Slider
+            value={this.state.abar}
+            onChange={handleChange2}
+            aria-labelledby="continuous-slider"
+            valueLabelDisplay="on"
+            min={4}
+            max={40}
+            id="slid1"
+            valueLabelDisplay="auto"
+          />
     <a>Speed:</a>
-    <input id="btn4" type="range" min="4" max="40" name='speed' value={this.state.speed} onChange={(e) => {this.speedChange(e)}}/>
-    <button onClick={()=>this.startSorting()} id="btn2">Run Sorting</button>
+    <Slider
+            value={this.state.speed}
+            onChange={speedChange2}
+            aria-labelledby="continuous-slider"
+            valueLabelDisplay="on"
+            min={1}
+            max={10}
+            id="slid2"
+            valueLabelDisplay="auto"
+            marks={marks}
+          />
+    <Button onClick={()=>this.startSorting()} id="btn2">Run Sorting</Button>
     <hr></hr>
     </div>
-    <div className="array-container">
+    <div className="array-container" id="x">
     <div className="tb"></div>
     {array.map((value, idx) => (
       <div
       className="array-bar"
       key={idx}
-      style={{height: `${value}px`}}>{value}</div>
+      style={{height: `${value}px`}}><p>{value}</p></div>
     ))}
     </div>
     <div className="arrangement">
