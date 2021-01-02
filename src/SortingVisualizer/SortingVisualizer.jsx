@@ -42,6 +42,7 @@ export default class SortingVisualizer extends React.Component {
       abar: '25',
       time: '1200',
       speed: '5',
+      disabled: false,
     };
   }
 
@@ -59,14 +60,8 @@ export default class SortingVisualizer extends React.Component {
       barStyle.color = 'rgba(0,0,0,1)';
       }, i*this.state.time/this.state.speed);
     }
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn4 = document.getElementById("btn4");
-    var btn5 = document.getElementById("btn5");
     setTimeout(() => {
-      btn1.disabled = false;
-      btn2.disabled = false;
-      btn5.disabled = false;
+    this.setState({disabled: false});
       }, (this.state.time/this.state.speed) * (arrayBar.length));
   }
   
@@ -586,14 +581,7 @@ export default class SortingVisualizer extends React.Component {
   }
 
   startSorting() {
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
-    var btn4 = document.getElementById("btn4");
-    var btn5 = document.getElementById("btn5");
-    btn1.disabled = true;
-    btn2.disabled = true;
-    btn5.disabled = true;
+    this.setState({disabled: !this.state.disabled});
     if(this.refs.sortingType.value == "HeapSort") {
       this.heapSort();
     }
@@ -672,8 +660,8 @@ render() {
   return (
     <div>
     <div>
-    <Button onClick={()=>this.resetArray()} id="btn1">Generate a new array</Button>
-    <select className="browser-default custom-select" ref="sortingType" id="btn5" onChange={()=>this.resetArray()}>
+    <Button onClick={()=>this.resetArray()}  disabled={this.state.disabled} id="btn1">Generate a new array</Button>
+    <select className="browser-default custom-select" ref="sortingType" id="btn5"  disabled={this.state.disabled} onChange={()=>this.resetArray()}>
     <option value="BubbleSort">Bubble Sort</option>
     <option value="CombSort">Comb Sort</option>
     <option value="CycleSort">Cycle Sort</option>
@@ -697,6 +685,7 @@ render() {
             max={40}
             id="slid1"
             valueLabelDisplay="auto"
+            disabled={this.state.disabled}
           />
     <a>Speed:</a>
     <Slider
@@ -709,8 +698,9 @@ render() {
             id="slid2"
             valueLabelDisplay="auto"
             marks={marks}
+            disabled={this.state.disabled}
           />
-    <Button onClick={()=>this.startSorting()} id="btn2">Run Sorting</Button>
+    <Button  disabled={this.state.disabled} onClick={()=>this.startSorting()} id="btn2">Run Sorting</Button>
     <hr></hr>
     </div>
     <div className="array-container" id="x">
