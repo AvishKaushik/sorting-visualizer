@@ -82,8 +82,8 @@ label {
   max-height: 600px;
   color: #000000;
   font-size: 0.7em;
-  border: 4px solid rgb(12, 53, 71);
-  border-bottom: 4px solid #ffbf00;
+  border: 1.5px solid rgb(12, 53, 71);
+  border-bottom: 4px solid rgb(12, 53, 71);
   transition: 1s;
   box-shadow: 5px 10px 10px #888888;
   width: 30px;

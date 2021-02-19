@@ -13,8 +13,8 @@ import PigeonholeSorting from '../SortingAlgorithms/PigeonholeSort.js';
 import GnomeSorting from '../SortingAlgorithms/GnomeSort.js';
 import BogoSorting from '../SortingAlgorithms/BogoSort.js';
 import { Button, Slider} from '@material-ui/core';
-import '@fortawesome/fontawesome-free/css/all.min.css'; 
-import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import './SortingVisualizer.css';
 
@@ -61,15 +61,17 @@ export default class SortingVisualizer extends React.Component {
       }, i*this.state.time/this.state.speed);
     }
     setTimeout(() => {
+      this.state.array.sort(function(a, b){return a-b});
     this.setState({disabled: false});
       }, (this.state.time/this.state.speed) * (arrayBar.length));
   }
-  
+
   resetArray() {
     const array = [];
     for ( let i=0;i<this.state.abar;i++) {
       array.push(randomIntFromInterval(40,580));
     }
+    this.setState({array});
     this.setState({array});
     const arrayBar=document.getElementsByClassName('array-bar');
     for ( let i=0;i<array.length;i++) {
@@ -80,10 +82,12 @@ export default class SortingVisualizer extends React.Component {
       else{
       const boStyle = arrayBar[i].style;
       boStyle.backgroundColor='#ffbf00';
+      arrayBar[i].innerHTML=array[i];
       }
     }
     var vl=document.getElementById("x");
     vl.style.width=(((this.state.abar)*36)+80)+'px';
+    console.log(array);
   }
 
   quickSort() {
