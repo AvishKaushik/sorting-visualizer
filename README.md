@@ -45,12 +45,9 @@ With adjustable size, adjustable speed comes in handy for this application as we
 
 ## Libraries and Resources used :
 
-ReactJS
-
-Material UI
-
-CodeMirror
-
-GitHub Pages
-
-NPM
+* ReactJS
+* Material UI
+* GitHub Pages
+* NPM
+* BootStrap
+* MDB React
