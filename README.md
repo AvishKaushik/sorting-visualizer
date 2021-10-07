@@ -1,68 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sorting Visualizer
 
-## Available Scripts
+Welcome to Sorting Visualizer! This is a web application designed to make it easy for users to learn about different algorithms and approaches to sort an array. All the algorithms basically contains 3 common steps which are selection of numbers, comparison between numbers and swapping the numbers. These things are displayed by using variety of colors in the visualizer to make it more easy to understand.
 
-In the project directory, you can run:
 
-### `npm start`
+You can check this out by clicking on the given link : https://avishkaushik.github.io/sorting-visualizer
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## How does this works?
 
-### `npm test`
+This web application is designed using ReactJS and several other libraries. This project contains a window which will contain our array and are represented by a bar and it's value is written on the top of the bar.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://user-images.githubusercontent.com/46262629/136324772-8677466c-b3b1-4e19-996d-33fb189741bd.png)
 
-### `npm run build`
+There are several functions we can perform in the application. This includes a function which will generate a random array of same size.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image](https://user-images.githubusercontent.com/46262629/136324960-bf260e16-6e70-435a-ab8c-14aec1764f29.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The second feature consist of a drop down menu which will display us the working of particular algorithm is sorting the given array. The drop-down menu consist of the given algorithms:
+1. Bubble Sort
+2. Comb Sort
+3. Cycle Sort
+4. Gnome Sort
+5. Heap Sort
+6. Insertion Sort
+7. Merge Sort
+8. Pigeonhole Sort
+9. Quick Sort
+10. Radix Sort
+11. Selection Sort
+12. Shell Sort
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+![image](https://user-images.githubusercontent.com/46262629/136325280-154711ba-490c-4883-819f-26d1201899b8.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Another feature comes as an adjustable size of the array. A slider is given to generate a randomize array of required size. The maximum possible size for an array can be 40 and the minimum limit will be 4.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image](https://user-images.githubusercontent.com/46262629/136325587-924e41bc-0fc1-4669-9793-bfe21fe99814.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+With adjustable size, adjustable speed comes in handy for this application as we will need more speed while sorting larger size of array because slow speed can take a lot of time. Also, smaller size with slow speed will make it easier and faster to understand.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![image](https://user-images.githubusercontent.com/46262629/136325924-f4b157a8-605a-4239-896d-2e1e05357ea2.png)
 
-## Learn More
+***Note: It is advised to prefer slower speed for smaller size of array and faster speed for larger size of array.***
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Libraries and Resources used :
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ReactJS
 
-### Code Splitting
+Material UI
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+CodeMirror
 
-### Analyzing the Bundle Size
+GitHub Pages
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+NPM
